@@ -1,0 +1,13 @@
+name = "CpuDispatcher"
+uuid = "e928ebb4-b0bd-11e9-3a3c-adce1322a6b1"
+authors = ["miguel raz <miguelraz@ciencias.unam.mx>"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
