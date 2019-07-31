@@ -8,6 +8,11 @@ proccpuinfo() = read(pipeline(`cat /proc/cpuinfo`, `grep flags`, `uniq`, `cut -c
 fs_proc = proccpuinfo()
 
 # jl_dump_host_cpu
+
+so = IOBuffer()
+x = run(pipeline(`julia -e "ccall(:jl_dump_host_cpu,Cvoid,())"`, stdout=so, stderr=so))
+String(take!(so))
+
 function jldumphost()
 	read(`julia -e "ccall(:jl_dump_host_cpu,Cvoid,())"`, String) # FIX PLZ IZ BROKEN
 	jldump = "sse3, pclmul, ssse3, fma, cx16, sse4.1, sse4.2, movbe, popcnt, aes, xsave, avx, f16c, rdrnd, fsgsbase, bmi, avx2, bmi2, sahf, lzcnt, xsaveopt" |> x -> split(x, ", ") |> sort .|> uppercase;
